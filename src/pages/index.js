@@ -4,5 +4,7 @@ import Home from "./Home";
 import Login from "./Login";
 import Profile from "./Profile";
 import SignUp from "./SignUp";
+import Bookmarks from "./Bookmarks";
+import AddPost from "./AddPost";
 
-export { Following, ForYou, Home, Login, Profile, SignUp };
+export { Following, ForYou, Home, Login, Profile, SignUp, Bookmarks, AddPost };

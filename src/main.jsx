@@ -3,7 +3,18 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Following, ForYou, Home, Login, Profile, SignUp } from "./pages";
+import {
+  AddPost,
+  Bookmarks,
+  Following,
+  ForYou,
+  Home,
+  Login,
+  Profile,
+  SignUp,
+} from "./pages";
+import { Provider } from "react-redux";
+import { store } from "./store/store.js";
 
 const router = createBrowserRouter([
   {
@@ -13,33 +24,45 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+        children: [
+          {
+            path: "for-you",
+            element: <ForYou />,
+          },
+          {
+            path: "following",
+            element: <Following />,
+          },
+        ],
       },
       {
-        path: "for-you",
-        element: <ForYou />,
+        path: "bookmarks",
+        element: <Bookmarks />,
       },
       {
-        path: "following",
-        element: <Following />,
-      },
-      {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "signup",
-        element: <SignUp />,
-      },
-      {
-        path: "profile",
+        path: "profile/:slug",
         element: <Profile />,
       },
+      {
+        path: "add-post",
+        element: <AddPost />,
+      },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
