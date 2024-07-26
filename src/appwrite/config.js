@@ -81,11 +81,11 @@ export class AppwriteService {
 
   async getAllPosts() {
     try {
-      await this.databases.listDocuments(
+      return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId
       );
-      return true;
+      // return true;
     } catch (error) {
       console.log("Appwrite :: getAllPosts :: ", error);
     }

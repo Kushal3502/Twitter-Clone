@@ -1,9 +1,20 @@
-import React from 'react'
+import React from "react";
+import { useSelector } from "react-redux";
+import { TweetCard } from "../components";
 
 function ForYou() {
+  const posts = useSelector((state) => state.tweets.tweets);
+  console.log(posts);
+
   return (
-    <div>ForYou</div>
-  )
+    <div>
+      {posts.map((item) => (
+        <div>
+          <TweetCard {...item} />
+        </div>
+      ))}
+    </div>
+  );
 }
 
-export default ForYou
+export default ForYou;

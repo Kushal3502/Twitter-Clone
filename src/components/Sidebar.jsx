@@ -31,7 +31,7 @@ function Sidebar() {
   }
 
   return (
-    <div className="w-64 p-5 bg-gray-900  h-full fixed flex flex-col justify-between">
+    <div className="w-64 p-5 bg-gray-900 border-r-2 border-gray-600 h-full fixed flex flex-col justify-between">
       <div className=" flex flex-col gap-10">
         <div className="mb-6 text-2xl font-bold">
           <Link to={"/"}>
