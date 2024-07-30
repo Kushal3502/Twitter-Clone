@@ -12,6 +12,7 @@ import {
   Login,
   Profile,
   SignUp,
+  ViewTweet,
 } from "./pages";
 import { Provider } from "react-redux";
 import { store } from "./store/store.js";
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
         path: "add-post",
         element: <AddPost />,
       },
+      {
+        path: "tweet/:slug",
+        element: <ViewTweet />,
+      },
     ],
   },
   {
@@ -60,9 +65,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );

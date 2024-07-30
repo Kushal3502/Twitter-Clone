@@ -11,7 +11,7 @@ const postSlice = createSlice({
   reducers: {
     addPost: (state, action) => {
       const post = {
-        id: ID.unique(),
+        id: action.payload.$id,
         userId: action.payload.userId,
         name: action.payload.name,
         content: action.payload.content,

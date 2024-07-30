@@ -9,7 +9,7 @@ function ForYou() {
   return (
     <div>
       {posts.map((item) => (
-        <div>
+        <div key={item.id}>
           <TweetCard {...item} />
         </div>
       ))}

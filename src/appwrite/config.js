@@ -55,12 +55,11 @@ export class AppwriteService {
 
   async getPost(id) {
     try {
-      await this.databases.getDocument(
+      return await this.databases.getDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         id
       );
-      return true;
     } catch (error) {
       console.log("Appwrite :: getPost :: ", error);
     }
@@ -100,6 +99,7 @@ export class AppwriteService {
       );
     } catch (error) {
       console.log("Appwrite :: uploadFile :: ", error);
+      return false;
     }
   }
 
