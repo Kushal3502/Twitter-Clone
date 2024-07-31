@@ -1,6 +1,6 @@
-import React, { useId } from "react";
+import React, { useId, forwardRef } from "react";
 
-function Input({ label, type = "text", className = "", ...props }, ref) {
+const Input = ({ label, type = "text", className = "", ...props }, ref) => {
   const id = useId();
 
   return (
@@ -15,10 +15,10 @@ function Input({ label, type = "text", className = "", ...props }, ref) {
         id={id}
         ref={ref}
         {...props}
-        className={`w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${className}`}
+        className={`w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm md:px-3 md:py-2 ${className}`}
       />
     </div>
   );
-}
+};
 
-export default React.forwardRef(Input);
+export default forwardRef(Input);

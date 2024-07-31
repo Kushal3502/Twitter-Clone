@@ -12,12 +12,13 @@ function Tweet({ post }) {
   const [loader, setLoader] = useState(false);
   const { register, handleSubmit, getValues } = useForm({
     defaultValues: {
-      name: "",
-      userId: "",
-      content: "",
-      featuredImage: null,
+      name: "" || post?.name,
+      userId: "" || post?.userId,
+      content: "" || post?.content,
+      featuredImage: null || post?.featuredImage,
     },
   });
+  console.log(post);
   const posts = useSelector((state) => state.tweets.tweets);
   console.log(posts);
 
@@ -27,17 +28,29 @@ function Tweet({ post }) {
   const handlePost = async (data) => {
     console.log(data);
     setLoader(true);
-    const image = await appwriteService.uploadFile(data.featuredImage[0]);
-    console.log(image);
-    if (image) {
+    if (post) {
+      const file = data.featuredImage
+        ? await appwriteService.uploadFile(data.featuredImage[0])
+        : null;
+      if (file) {
+        await appwriteService.deleteFile(post.featuredImage);
+      }
+      const updatedTweet = await appwriteService.updatePost(post.$id, {
+        ...data,
+        featuredImage: file ? file.$id : undefined,
+      });
+    } else {
+      const image = await appwriteService.uploadFile(data.featuredImage[0]);
+      console.log(image);
+
       data.name = userData.name;
       data.userId = userData.$id;
-      data.featuredImage = image.$id;
+      data.featuredImage = image ? image.$id : null;
       const newPost = await appwriteService.createPost({ ...data });
       dispatch(addPost({ ...data }));
-      setLoader(false);
-      navigate("/");
     }
+    navigate("/");
+    setLoader(false);
   };
 
   return (
@@ -64,6 +77,17 @@ function Tweet({ post }) {
             placeholder="What's happening?"
             {...register("content")}
           />
+          {post && (
+            <div className="w-full mb-4">
+              {post.featuredImage && (
+                <img
+                  src={appwriteService.getFilePreview(post.featuredImage)}
+                  alt={post.title}
+                  className="rounded-lg"
+                />
+              )}
+            </div>
+          )}
           <div className="flex justify-between items-center">
             <div>
               <input

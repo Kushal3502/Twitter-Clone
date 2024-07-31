@@ -11,13 +11,14 @@ const postSlice = createSlice({
   reducers: {
     addPost: (state, action) => {
       const post = {
-        id: action.payload.$id,
+        $id: action.payload.$id,
         userId: action.payload.userId,
         name: action.payload.name,
         content: action.payload.content,
         featuredImage: action.payload.featuredImage,
       };
       state.tweets.push(post);
+      // state.tweets = [post,...state.tweets.tweets]
     },
     updatePost: () => {},
     deletePost: () => {},

@@ -7,5 +7,17 @@ import SignUp from "./SignUp";
 import Bookmarks from "./Bookmarks";
 import AddPost from "./AddPost";
 import ViewTweet from "./ViewTweet";
+import EditTweet from "./EditTweet";
 
-export { Following, ForYou, Home, Login, Profile, SignUp, Bookmarks, AddPost, ViewTweet };
+export {
+  Following,
+  ForYou,
+  Home,
+  Login,
+  Profile,
+  SignUp,
+  Bookmarks,
+  AddPost,
+  ViewTweet,
+  EditTweet,
+};

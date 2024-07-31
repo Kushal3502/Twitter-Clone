@@ -67,12 +67,11 @@ export class AppwriteService {
 
   async getUserPosts(userId) {
     try {
-      await this.databases.listDocuments(
+      return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         [Query.equal("userId", userId)]
       );
-      return true;
     } catch (error) {
       console.log("Appwrite :: getUserPosts :: ", error);
     }

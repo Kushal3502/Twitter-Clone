@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import {
   AddPost,
   Bookmarks,
+  EditTweet,
   Following,
   ForYou,
   Home,
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
         element: <Bookmarks />,
       },
       {
-        path: "profile/:slug",
+        path: "profile",
         element: <Profile />,
       },
       {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "tweet/:slug",
         element: <ViewTweet />,
+      },
+      {
+        path: "edit-tweet/:slug",
+        element: <EditTweet />,
       },
     ],
   },
