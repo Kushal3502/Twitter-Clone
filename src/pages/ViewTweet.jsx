@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import appwriteService from "../appwrite/config";
 import { Hourglass } from "react-loader-spinner";
 import { useSelector } from "react-redux";
@@ -11,6 +11,7 @@ function ViewTweet() {
   const [loader, setLoader] = useState(false);
   const userData = useSelector((state) => state.auth.userData);
   const isAuthor = tweet && userData ? tweet.userId === userData.$id : false;
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoader(true);
@@ -21,9 +22,10 @@ function ViewTweet() {
   }, [slug]);
   console.log(tweet);
   const handleDelete = async () => {
-    appwriteService
-      .deletePost(tweet.$id)
-      .then((res) => appwriteService.deleteFile(tweet.featuredImage));
+    appwriteService.deletePost(tweet.$id).then((res) => {
+      appwriteService.deleteFile(tweet.featuredImage);
+      navigate("/");
+    });
   };
 
   return (
