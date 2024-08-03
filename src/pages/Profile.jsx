@@ -13,6 +13,7 @@ function Profile() {
   useEffect(() => {
     setLoader(true);
     appwriteService.getUserPosts(userData.$id).then((posts) => {
+      console.log(posts);
       setTweet(posts.documents);
       setLoader(false);
     });
@@ -33,7 +34,7 @@ function Profile() {
           />
         </div>
       ) : (
-        <div className="mx-auto w-full sm:w-4/5 md:w-3/5 lg:w-2/5 px-4 mt-14">
+        <div className="mx-auto w-full sm:w-4/5 md:w-3/5 lg:w-2/5 px-4 mt-10">
           <div className="flex items-center py-8 border-b mb-8">
             <img
               src="https://cdn3.iconfinder.com/data/icons/web-design-and-development-2-6/512/87-1024.png"
@@ -50,7 +51,14 @@ function Profile() {
             {tweet &&
               tweet.map((tweet) => (
                 <div key={tweet.$id}>
-                  <TweetCard {...tweet} />
+                  <TweetCard
+                    name={tweet.name}
+                    content={tweet.content}
+                    featuredImage={tweet.featuredImage}
+                    $id={tweet.$id}
+                    userId={tweet.userId}
+                    initialLikes={tweet.likes}
+                  />
                 </div>
               ))}
           </div>

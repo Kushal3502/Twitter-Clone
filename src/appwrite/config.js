@@ -1,4 +1,12 @@
-import { Client, Databases, ID, Query, Storage } from "appwrite";
+import {
+  Client,
+  Databases,
+  ID,
+  Permission,
+  Query,
+  Role,
+  Storage,
+} from "appwrite";
 import conf from "../conf/conf";
 
 export class AppwriteService {
@@ -33,7 +41,7 @@ export class AppwriteService {
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         id,
-        { content, featuredImage }
+        { content, featuredImage },
       );
     } catch (error) {
       console.log("Appwrite :: updatePost :: ", error);
@@ -52,6 +60,22 @@ export class AppwriteService {
       console.log("Appwrite :: deletePost :: ", error);
     }
   }
+
+  async updateLikes(id, likes) {
+    try {
+      return await this.databases.updateDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteCollectionId,
+        id,
+        { likes },
+        [Permission.update(Role.any())]
+      );
+    } catch (error) {
+      console.log("Appwrite :: updateLikes :: ", error);
+    }
+  }
+
+  
 
   async getPost(id) {
     try {

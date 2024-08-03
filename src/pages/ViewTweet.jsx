@@ -45,14 +45,16 @@ function ViewTweet() {
           {tweet && (
             <div className="border border-gray-600 rounded-lg p-4 w-full max-w-2xl bg-gray-900 shadow-sm text-white overflow-hidden">
               <div className="flex items-center mb-2 justify-between">
-                <div className="flex items-center gap-2">
-                  <img
-                    src="https://cdn3.iconfinder.com/data/icons/web-design-and-development-2-6/512/87-1024.png"
-                    alt="User avatar"
-                    className="w-10 h-10 rounded-full"
-                  />
-                  <h2 className="text-lg font-semibold">{tweet.name}</h2>
-                </div>
+                <Link to={"/profile"}>
+                  <div className="flex items-center gap-2">
+                    <img
+                      src="https://cdn3.iconfinder.com/data/icons/web-design-and-development-2-6/512/87-1024.png"
+                      alt="User avatar"
+                      className="w-10 h-10 rounded-full"
+                    />
+                    <h2 className="text-lg font-semibold">{tweet.name}</h2>
+                  </div>
+                </Link>
                 {isAuthor && (
                   <div className="flex gap-3">
                     <Link to={`/edit-tweet/${slug}`}>
