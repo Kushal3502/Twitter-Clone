@@ -3,13 +3,13 @@ import { Link, useParams } from "react-router-dom";
 import appwriteService from "../appwrite/config";
 import { Hourglass } from "react-loader-spinner";
 import { useSelector } from "react-redux";
+import { BookmarkButton, LikeButton } from "../components";
 
 function ViewTweet() {
   const { slug } = useParams();
   const [tweet, setTweet] = useState(null);
   const [loader, setLoader] = useState(false);
   const userData = useSelector((state) => state.auth.userData);
-
   const isAuthor = tweet && userData ? tweet.userId === userData.$id : false;
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function ViewTweet() {
       setLoader(false);
     });
   }, [slug]);
-
+  console.log(tweet);
   const handleDelete = async () => {
     appwriteService
       .deletePost(tweet.$id)
@@ -86,8 +86,16 @@ function ViewTweet() {
               <div className="flex justify-between text-gray-500 text-sm border-b-2 border-gray-600 pb-4 px-8">
                 <span className="cursor-pointer hover:text-white">Reply</span>
                 <span className="cursor-pointer hover:text-white">Retweet</span>
-                <span className="cursor-pointer hover:text-white">Like</span>
-                <span className="cursor-pointer hover:text-white">Save</span>
+                <span className="cursor-pointer hover:text-white">
+                  <LikeButton
+                    currentUserId={userData.$id}
+                    tweetId={slug}
+                    initialLikes={tweet.likes?.length}
+                  />
+                </span>
+                <span className="cursor-pointer hover:text-white">
+                  <BookmarkButton currentUserId={userData.$id} tweetId={slug} />
+                </span>
               </div>
             </div>
           )}

@@ -16,6 +16,7 @@ const postSlice = createSlice({
         content: action.payload.content,
         featuredImage: action.payload.featuredImage,
         initialLikes: action.payload.likes || [],
+        initialBookmarks: action.payload.bookmarks || [],
       };
       state.tweets.push(post);
     },

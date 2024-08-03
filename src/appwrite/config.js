@@ -41,7 +41,7 @@ export class AppwriteService {
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
         id,
-        { content, featuredImage },
+        { content, featuredImage }
       );
     } catch (error) {
       console.log("Appwrite :: updatePost :: ", error);
@@ -75,7 +75,19 @@ export class AppwriteService {
     }
   }
 
-  
+  async updateBookmarks(id, bookmarks) {
+    try {
+      return await this.databases.updateDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteCollectionId,
+        id,
+        { bookmarks },
+        [Permission.update(Role.any())]
+      );
+    } catch (error) {
+      console.log("Appwrite :: updateBookmarks :: ", error);
+    }
+  }
 
   async getPost(id) {
     try {
@@ -98,6 +110,18 @@ export class AppwriteService {
       );
     } catch (error) {
       console.log("Appwrite :: getUserPosts :: ", error);
+    }
+  }
+
+  async getBookmarks(userId) {
+    try {
+      return await this.databases.listDocuments(
+        conf.appwriteDatabaseId,
+        conf.appwriteCollectionId,
+        [Query.contains("bookmarks", [userId])]
+      );
+    } catch (error) {
+      console.log("Appwrite :: getBookmarks :: ", error);
     }
   }
 

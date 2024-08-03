@@ -7,8 +7,6 @@ import { BookmarkButton, LikeButton } from "./";
 function TweetCard({ name, content, featuredImage, $id, initialLikes }) {
   const currentUser = useSelector((state) => state.auth.userData);
 
-  console.log(appwriteService.getFilePreview(featuredImage));
-
   return (
     <div className="border border-gray-600 rounded-lg p-4 mx-auto my-4 bg-gray-900 shadow-sm text-white w-full max-w-xl lg:mx-auto">
       <Link to={`/tweet/${$id}`}>
@@ -34,7 +32,7 @@ function TweetCard({ name, content, featuredImage, $id, initialLikes }) {
           )}
         </div>
       </Link>
-      <div className="flex justify-between text-gray-500 text-sm p-2">
+      <div className="flex justify-between text-gray-500 text-sm p-2 px-8">
         <span className="cursor-pointer hover:text-white">Reply</span>
         <span className="cursor-pointer hover:text-white">Retweet</span>
         <span className="cursor-pointer hover:text-white">

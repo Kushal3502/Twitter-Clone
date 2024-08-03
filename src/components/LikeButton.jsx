@@ -18,6 +18,7 @@ function LikeButton({ currentUserId, tweetId, initialLikes }) {
       const idx = postLikes.indexOf(String(currentUserId));
       console.log(idx);
       setLiked(idx !== -1);
+      setLikeCount(postLikes.length);
     });
   }, [tweetId, currentUserId]);
 
@@ -25,7 +26,7 @@ function LikeButton({ currentUserId, tweetId, initialLikes }) {
     let updatedLikes;
     const idx = likes.indexOf(currentUserId);
 
-    if (idx == -1) {
+    if (idx === -1) {
       updatedLikes = [...likes, currentUserId];
       setLiked(true);
     } else {
@@ -33,10 +34,13 @@ function LikeButton({ currentUserId, tweetId, initialLikes }) {
       setLiked(false);
     }
     setLikeCount(updatedLikes.length);
+    setLikes(updatedLikes);
     console.log(updatedLikes);
     appwriteService
       .updateLikes(tweetId, updatedLikes)
-      .then((item) => dispatch(updateTweetLikes(tweetId, currentUserId)));
+      .then(() =>
+        dispatch(updateTweetLikes({ id: tweetId, likes: currentUserId }))
+      );
   };
 
   return (
