@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import toast from 'react-hot-toast'
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../appwrite/auth";
 import { logout } from "../store/slices/authSlice";
@@ -19,6 +20,7 @@ function Sidebar() {
   function handleLogout() {
     authService.logout().then(() => {
       dispatch(logout());
+      toast.success('You are successfully logout')
       navigate("/login");
     });
   }
