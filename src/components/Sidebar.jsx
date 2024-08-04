@@ -26,7 +26,7 @@ function Sidebar() {
   return (
     <div>
       {/* Full sidebar for larger screens */}
-      <div className=" w-64 p-5 bg-gray-900 border-r-2 border-gray-600 h-full fixed flex flex-col justify-between">
+      <div className="hidden lg:flex lg:w-64 lg:p-5 lg:bg-gray-900 lg:border-r-2 lg:border-gray-600 lg:h-full lg:fixed lg:flex-col lg:justify-between">
         <div className="flex flex-col gap-10">
           <div className="mb-6 text-2xl font-bold">
             <Link to={"/"}>
@@ -87,9 +87,9 @@ function Sidebar() {
 
       {/* Full sidebar for smaller screens when open */}
       {isOpen && (
-        <div className="lg:hidden fixed inset-0 z-40 flex flex-col">
-          <div className="bg-gray-900 border-t-2 border-gray-600 flex flex-col flex-grow p-5">
-            <div className="flex flex-col flex-grow">
+        <div className="h-full lg:hidden fixed inset-0 z-40 flex flex-col justify-between bg-gray-900">
+          <div className="p-5 border-t-2 border-gray-600 flex-grow flex flex-col justify-between">
+            <div className="flex flex-col">
               <div className="mb-6 mt-12">
                 {navItems.map((item) => (
                   <div key={item.slug} className="my-2">
@@ -103,34 +103,25 @@ function Sidebar() {
                   </div>
                 ))}
               </div>
-              <div className="flex flex-col gap-2 mt-auto">
-                <Link to={"/add-post"} onClick={() => setIsOpen(false)}>
-                  <button className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700">
-                    Post
-                  </button>
-                </Link>
-                <Link to={"/login"}>
-                  <button
-                    className="w-full py-2 px-4 bg-red-500 text-white rounded hover:bg-red-700"
-                    onClick={() => {
-                      handleLogout();
-                      setIsOpen(false);
-                    }}
-                  >
-                    Logout
-                  </button>
-                </Link>
-              </div>
             </div>
-          </div>
-          <div className="hidden lg:flex justify-end p-4 absolute bottom-0 right-0">
-            <Link to={"/"}>
-              <img
-                src="https://www.freepnglogos.com/uploads/twitter-x-logo-png/twitter-x-logo-png-9.png"
-                className="w-12 h-12"
-                alt="Logo"
-              />
-            </Link>
+            <div className="flex flex-col gap-2 mt-auto pb-5">
+              <Link to={"/add-post"} onClick={() => setIsOpen(false)}>
+                <button className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700">
+                  Post
+                </button>
+              </Link>
+              <Link to={"/login"}>
+                <button
+                  className="w-full py-2 px-4 bg-red-500 text-white rounded hover:bg-red-700"
+                  onClick={() => {
+                    handleLogout();
+                    setIsOpen(false);
+                  }}
+                >
+                  Logout
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       )}

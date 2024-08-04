@@ -8,7 +8,7 @@ function TweetCard({ name, content, featuredImage, $id, initialLikes }) {
   const currentUser = useSelector((state) => state.auth.userData);
 
   return (
-    <div className="border border-gray-600 rounded-lg p-4 mx-auto my-4 bg-gray-900 shadow-sm text-white w-full max-w-xl lg:mx-auto">
+    <div className="border border-gray-600 rounded-lg p-4 mx-auto my-4 bg-gray-900 shadow-sm text-white w-full max-w-2xl lg:max-w-full sm:w-full">
       <Link to={`/tweet/${$id}`}>
         <div className="flex items-center mb-2">
           <img
@@ -26,13 +26,13 @@ function TweetCard({ name, content, featuredImage, $id, initialLikes }) {
             <div className="mt-2">
               <img
                 src={appwriteService.getFilePreview(featuredImage).href}
-                className=" rounded w-full max-h-80 object-contain"
+                className="rounded w-full max-h-80 object-contain"
               />
             </div>
           )}
         </div>
       </Link>
-      <div className="flex justify-between text-gray-500 text-sm p-2 px-8">
+      <div className="flex justify-between text-gray-500 text-sm p-2 sm:flex-col sm:items-start sm:space-y-2 lg:flex-row lg:items-center lg:space-y-0">
         <span className="cursor-pointer hover:text-white">Reply</span>
         <span className="cursor-pointer hover:text-white">Retweet</span>
         <span className="cursor-pointer hover:text-white">

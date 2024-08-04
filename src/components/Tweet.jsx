@@ -56,7 +56,7 @@ function Tweet({ post }) {
   return (
     <>
       {loader ? (
-        <div>
+        <div className="flex justify-center items-center h-screen">
           <Hourglass
             visible={true}
             height="80"
@@ -73,7 +73,7 @@ function Tweet({ post }) {
           onSubmit={handleSubmit(handlePost)}
         >
           <textarea
-            className="w-full h-32 mb-4 p-2 text-white bg-gray-900 rounded-md resize-none focus:outline-none"
+            className="w-full h-48 sm:h-32 mb-4 p-4 text-white bg-gray-900 rounded-md resize-none focus:outline-none"
             placeholder="What's happening?"
             {...register("content")}
           />
