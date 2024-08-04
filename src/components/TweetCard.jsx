@@ -32,7 +32,7 @@ function TweetCard({ name, content, featuredImage, $id, initialLikes }) {
           )}
         </div>
       </Link>
-      <div className="flex justify-between text-gray-500 text-sm p-2 sm:flex-col sm:items-start sm:space-y-2 lg:flex-row lg:items-center lg:space-y-0">
+      <div className="flex justify-between text-gray-500 text-sm p-2 lg:flex-row lg:items-center lg:space-y-0">
         <span className="cursor-pointer hover:text-white">Reply</span>
         <span className="cursor-pointer hover:text-white">Retweet</span>
         <span className="cursor-pointer hover:text-white">
