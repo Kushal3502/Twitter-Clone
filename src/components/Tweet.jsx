@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import toast from 'react-hot-toast'
 import appwriteService from "../appwrite/config";
 import { useNavigate } from "react-router-dom";
 import { addPost } from "../store/slices/postSlice";
@@ -48,6 +49,7 @@ function Tweet({ post }) {
       data.featuredImage = image ? image.$id : null;
       const newPost = await appwriteService.createPost({ ...data });
       dispatch(addPost({ ...data }));
+      toast.success(`New post created`)
     }
     navigate("/");
     setLoader(false);
@@ -75,6 +77,7 @@ function Tweet({ post }) {
           <textarea
             className="w-full h-48 sm:h-32 mb-4 p-4 text-white bg-gray-900 rounded-md resize-none focus:outline-none"
             placeholder="What's happening?"
+            required
             {...register("content")}
           />
           {post && (
