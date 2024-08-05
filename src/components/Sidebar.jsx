@@ -1,5 +1,11 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
+
+import { CgProfile } from "react-icons/cg";
+import { FaBookmark } from "react-icons/fa";
+import { IoMdHome } from "react-icons/io";
+
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../appwrite/auth";
 import { logout } from "../store/slices/authSlice";
@@ -8,9 +14,9 @@ function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: "Home", slug: "/" },
-    { name: "Bookmarks", slug: "/bookmarks" },
-    { name: "Profile", slug: "/profile" },
+    { name: "Home", slug: "/", icon: <IoMdHome /> },
+    { name: "Bookmarks", slug: "/bookmarks", icon: <FaBookmark /> },
+    { name: "Profile", slug: "/profile", icon: <CgProfile /> },
   ];
 
   const dispatch = useDispatch();
@@ -19,6 +25,7 @@ function Sidebar() {
   function handleLogout() {
     authService.logout().then(() => {
       dispatch(logout());
+      toast.success("You are successfully logout");
       navigate("/login");
     });
   }
@@ -87,41 +94,41 @@ function Sidebar() {
 
       {/* Full sidebar for smaller screens when open */}
       {isOpen && (
-        <div className="h-full lg:hidden fixed inset-0 z-40 flex flex-col justify-between bg-gray-900">
-          <div className="p-5 border-t-2 border-gray-600 flex-grow flex flex-col justify-between">
-            <div className="flex flex-col">
-              <div className="mb-6 mt-12">
-                {navItems.map((item) => (
-                  <div key={item.slug} className="my-2">
-                    <Link
-                      to={item.slug}
-                      className="text-lg text-gray-200 hover:text-blue-500"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="flex flex-col gap-2 mt-auto pb-5">
-              <Link to={"/add-post"} onClick={() => setIsOpen(false)}>
-                <button className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700">
-                  Post
-                </button>
-              </Link>
-              <Link to={"/login"}>
-                <button
-                  className="w-full py-2 px-4 bg-red-500 text-white rounded hover:bg-red-700"
-                  onClick={() => {
-                    handleLogout();
-                    setIsOpen(false);
-                  }}
+        <div className="fixed inset-y-0 left-0 z-40 w-16 lg:hidden bg-gray-900 hover:w-64 transition-all duration-300 flex flex-col justify-between">
+          <div className="p-2 flex-grow flex flex-col items-center lg:items-start">
+            <div className="my-6">
+              {navItems.map((item) => (
+                <Link
+                  key={item.slug}
+                  to={item.slug}
+                  className="my-2 w-full text-gray-200 flex items-center hover:text-blue-500"
+                  onClick={() => setIsOpen(false)}
                 >
-                  Logout
-                </button>
-              </Link>
+                  <div className="w-full flex items-center space-x-2">
+                    <item.icon className="h-6 w-6" />
+                    <span className="hidden lg:inline">{item.name}</span>
+                  </div>
+                </Link>
+              ))}
             </div>
+          </div>
+          <div className="flex flex-col gap-2 pb-5">
+            <Link to={"/add-post"} onClick={() => setIsOpen(false)}>
+              <button className="w-full py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-700">
+                Post
+              </button>
+            </Link>
+            <Link to={"/login"}>
+              <button
+                className="w-full py-2 px-4 bg-red-500 text-white rounded hover:bg-red-700"
+                onClick={() => {
+                  handleLogout();
+                  setIsOpen(false);
+                }}
+              >
+                Logout
+              </button>
+            </Link>
           </div>
         </div>
       )}
