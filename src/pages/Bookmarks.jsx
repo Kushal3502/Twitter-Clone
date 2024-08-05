@@ -15,18 +15,18 @@ function Bookmarks() {
     appwriteService.getBookmarks(userData.$id).then((res) => {
       setPosts(res.documents);
       setLoader(false);
-      setReload(false);
+      setReload(false)
     });
-  }, [reload, userData.$id]);
+  }, [reload]);
 
   return (
     <>
-      <div className="text-center mt-6 mb-4">
+      <div className="text-center mt-6">
         <h2 className="text-3xl font-bold text-white">Bookmarks</h2>
       </div>
-      <div className="flex flex-col items-center px-4 py-2 overflow-auto">
+      <div className="flex justify-center items-center min-h-screen">
         {loader ? (
-          <div className="flex justify-center items-center h-96">
+          <div className="flex justify-center items-center">
             <Hourglass
               visible={true}
               height="80"
@@ -38,7 +38,7 @@ function Bookmarks() {
             />
           </div>
         ) : (
-          <div className="w-full max-w-3xl">
+          <div className="mx-auto w-full sm:w-4/5 md:w-3/5 lg:w-2/5 px-4">
             {posts.map((item) => (
               <div
                 key={item.$id}

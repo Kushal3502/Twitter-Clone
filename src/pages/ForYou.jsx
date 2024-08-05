@@ -51,7 +51,7 @@ function ForYou() {
           />
         </div>
       ) : (
-        <div className="mx-auto w-full sm:w-4/5 md:w-3/5 lg:w-2/5 px-4 pb-4">
+        <div className="mx-auto w-full sm:w-4/5 md:w-3/5 lg:w-2/5 px-4">
           {posts.map((item) => (
             <div key={item.$id}>
               <TweetCard {...item} />
